@@ -425,7 +425,7 @@ class String16(ValueField):
     def pack_value(self, val):
         # Convert 8-byte string into 16-byte list
         if type(val) is str:
-            val = list(map(lambda c: ord(c), val))
+            val = [ord(c) for c in val]
 
         slen = len(val)
 

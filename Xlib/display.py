@@ -20,7 +20,7 @@
 import types
 
 # Xlib modules
-from Xlib import error, ext, X
+from . import error, ext, X
 
 # Xlib.protocol modules
 from Xlib.protocol import display, request, event, rq
@@ -103,7 +103,7 @@ class Display:
             if extname in exts:
 
                 # Import the module and fetch it
-                __import__('Xlib.ext.' + modname)
+                __import__('ext.' + modname,globals(),level=1)
                 mod = getattr(ext, modname)
 
                 info = self.query_extension(extname)
@@ -258,7 +258,7 @@ class Display:
 
         if object == 'display':
             if hasattr(self, name):
-                raise error.MethodOverrideError('attempting to replace display method: %s' % name)
+                raise AssertionError('attempting to replace display method: %s' % name)
 
             self.display_extension_methods[name] = function
 
@@ -267,7 +267,7 @@ class Display:
             for type in types:
                 cls = _resource_baseclasses[type]
                 if hasattr(cls, name):
-                    raise error.MethodOverrideError('attempting to replace %s method: %s' % (type, name))
+                    raise AssertionError('attempting to replace %s method: %s' % (type, name))
 
                 # Maybe should check extension overrides too
                 try:
@@ -282,7 +282,7 @@ class Display:
         the event class.  EVT will be cloned, and the attribute _code
         of the new event class will be set to CODE.
 
-        If NAME is ommitted, it will be set to the name of EVT.  This
+        If NAME is omitted, it will be set to the name of EVT.  This
         name is used to insert an entry in the DictWrapper
         extension_event.
         """
@@ -348,7 +348,7 @@ class Display:
         lowest index and secondarily on the lowest keycode."""
         try:
             # Copy the map list, reversing the arguments
-            return map(lambda x: (x[1], x[0]), self._keymap_syms[keysym])
+            return [(x[1], x[0]) for x in self._keymap_syms[keysym]]
         except KeyError:
             return []
 
