@@ -31,7 +31,7 @@ from Xlib import error
 from Xlib.support import lock, connect
 
 # Xlib.protocol modules
-from Xlib.protocol import rq, event
+from . import rq, event
 
 # in Python 3, bytes are an actual array; in python 2, bytes are still
 # string-like, so in order to get an array element we need to call ord()
@@ -513,10 +513,8 @@ class Display:
             # Ignore errors caused by a signal recieved while blocking.
             # All other errors are re-raised.
             except select.error as err:
-                # FIXME: err is not iterable
-                print(err)
-                #if err[0] != errno.EINTR:
-                #    raise err
+                if err.errno != errno.EINTR:
+                    raise err
 
                 # We must lock send_and_recv before we can loop to
                 # the start of the loop
@@ -546,8 +544,7 @@ class Display:
                     try:
                         bytes_recv = self.socket.recv(2048)
                     except socket.error as err:
-                        # TODO: FIXME:
-                        self.close_internal('server: %s' % err[1])
+                        self.close_internal('server: %s' % err.strerror)
                         raise self.socket_error
 
                     if not bytes_recv:
