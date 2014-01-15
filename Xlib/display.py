@@ -348,7 +348,7 @@ class Display:
         lowest index and secondarily on the lowest keycode."""
         try:
             # Copy the map list, reversing the arguments
-            return map(lambda x: (x[1], x[0]), self._keymap_syms[keysym])
+            return [(x[1], x[0]) for x in self._keymap_syms[keysym]]
         except KeyError:
             return []
 

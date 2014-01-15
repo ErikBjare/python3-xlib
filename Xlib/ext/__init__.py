@@ -29,4 +29,4 @@ __extensions__ = [
     ('RANDR', 'randr'),
     ]
 
-__all__ = map(lambda x: x[1], __extensions__)
+__all__ = [x[1] for x in __extensions__]
