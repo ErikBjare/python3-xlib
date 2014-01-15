@@ -20,7 +20,7 @@
 import types
 
 # Xlib modules
-from Xlib import error, ext, X
+from . import error, ext, X
 
 # Xlib.protocol modules
 from Xlib.protocol import display, request, event, rq
@@ -103,7 +103,7 @@ class Display:
             if extname in exts:
 
                 # Import the module and fetch it
-                __import__('Xlib.ext.' + modname)
+                __import__('ext.' + modname,globals(),level=1)
                 mod = getattr(ext, modname)
 
                 info = self.query_extension(extname)
@@ -282,7 +282,7 @@ class Display:
         the event class.  EVT will be cloned, and the attribute _code
         of the new event class will be set to CODE.
 
-        If NAME is ommitted, it will be set to the name of EVT.  This
+        If NAME is omitted, it will be set to the name of EVT.  This
         name is used to insert an entry in the DictWrapper
         extension_event.
         """

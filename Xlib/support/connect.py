@@ -42,9 +42,7 @@ _default_auth_mod = 'unix_connect'
 # Figure out which OS we're using.
 # sys.platform is either "OS-ARCH" or just "OS".
 
-_parts = sys.platform.split('-')
-platform = _parts[0]
-del _parts
+platform = sys.platform.split('-')[0]
 
 
 def get_display(display):
@@ -60,8 +58,8 @@ def get_display(display):
     """
 
     modname = _display_mods.get(platform, _default_display_mod)
-    mod = __import__('Xlib.support', globals(), fromlist=(modname,))
-    return getattr(mod, modname).get_display(display)
+    mod = __import__(modname, globals(),level=1)
+    return mod.get_display(display)
 
 
 def get_socket(dname, host, dno):
@@ -74,8 +72,8 @@ def get_socket(dname, host, dno):
     """
 
     modname = _socket_mods.get(platform, _default_socket_mod)
-    mod = __import__('Xlib.support', globals(), fromlist=(modname,))
-    return getattr(mod, modname).get_socket(dname, host, dno)
+    mod = __import__(modname, globals(),level=1)
+    return mod.get_socket(dname, host, dno)
 
 
 def get_auth(sock, dname, host, dno):
@@ -89,5 +87,5 @@ def get_auth(sock, dname, host, dno):
     """
 
     modname = _auth_mods.get(platform, _default_auth_mod)
-    mod = __import__('Xlib.support', globals(), fromlist=(modname,))
-    return getattr(mod, modname).get_auth(sock, dname, host, dno)
+    mod = __import__(modname, globals(),level=1)
+    return mod.get_auth(sock, dname, host, dno)
