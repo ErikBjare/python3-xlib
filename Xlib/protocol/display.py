@@ -512,7 +512,7 @@ class Display:
 
             # Ignore errors caused by a signal recieved while blocking.
             # All other errors are re-raised.
-            except select.error as err:
+            except OSError as err:
                 if err.errno != errno.EINTR:
                     raise err
 
@@ -527,7 +527,7 @@ class Display:
             if ws:
                 try:
                     i = self.socket.send(self.data_send)
-                except socket.error as err:
+                except OSError as err:
                     self.close_internal('server: %s' % err[1])
                     raise self.socket_error
 
@@ -543,7 +543,7 @@ class Display:
                 if recieving:
                     try:
                         bytes_recv = self.socket.recv(2048)
-                    except socket.error as err:
+                    except OSError as err:
                         self.close_internal('server: %s' % err.strerror)
                         raise self.socket_error
 
