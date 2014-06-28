@@ -287,8 +287,8 @@ class Display:
         extension_event.
         """
 
-        newevt = type(evt.__name__, evt.__bases__,
-                      evt.__dict__.copy())
+        newevt = type('{0}.SUB{1}'.format(evt.__name__, code),
+                      evt.__bases__, evt.__dict__.copy())
         newevt._code = code
 
         self.display.add_extension_event(code, newevt)
