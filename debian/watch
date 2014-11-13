@@ -1,2 +1,2 @@
 version=3
-http://pypi.python.org/packages/source/s/python3xlib-(.*)\.tar\.gz debian uupdate
+https://pypi.python.org/packages/source/p/python3-xlib/python3-xlib-(.*)\.tar\.gz debian uupdate
