@@ -10,7 +10,7 @@ X-Python-Version: >= 3.2
 #Vcs-Browser: http://anonscm.debian.org/?p=collab-maint/python3-xlib.git;a=summary
 
 Package: python3-xlib
-Architecture: any
+Architecture: all
 Depends: ${python3:Depends}, ${shlibs:Depends}, ${misc:Depends}
 Description: python3 binding of x11 API
  Pear python3 binding of x11 api
