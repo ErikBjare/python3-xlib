@@ -1,0 +1,16 @@
+Source: python3-xlib
+Section: python
+Priority: optional
+Maintainer: Liu Lang <gsushzhsosgsu@gmail.com>
+Build-Depends: debhelper (>= 9), dh-python, python3-all
+Standards-Version: 3.9.5
+Homepage: https://github.com/LiuLang/python3-xlib
+X-Python-Version: >= 3.2
+#Vcs-Git: git://anonscm.debian.org/collab-maint/python3-xlib.git
+#Vcs-Browser: http://anonscm.debian.org/?p=collab-maint/python3-xlib.git;a=summary
+
+Package: python3-xlib
+Architecture: any
+Depends: ${python3:Depends}, ${shlibs:Depends}, ${misc:Depends}
+Description: python3 binding of x11 API
+ Pear python3 binding of x11 api
