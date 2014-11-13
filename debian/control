@@ -12,5 +12,5 @@ X-Python-Version: >= 3.2
 Package: python3-xlib
 Architecture: all
 Depends: ${python3:Depends}, ${shlibs:Depends}, ${misc:Depends}
-Description: python3 binding of x11 API
- Pear python3 binding of x11 api
+Description: Interfce for Python3 to the X11 protocol
+ Pure python implementation of X11 protocol.
